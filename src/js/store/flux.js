@@ -48,7 +48,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			fetchUsers: async () => {
 				const token = JSON.parse(localStorage.getItem('access_token')); // Recuperar el token desde localStorage
 				try {
-					const response = await fetch(process.env.REACT_APP_API_URL+"/admin/users", {
+					const response = await fetch(process.env.REACT_APP_API_URL + "/admin/users", {
 						method: 'GET',
 						headers: {
 							'Authorization': `Bearer ${token}`, // Incluir el token en el encabezado de autorización
@@ -207,7 +207,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						password: password
 					};
 
-					const response = await fetch(process.env.REACT_APP_API_URL+"/admin/users", {
+					const response = await fetch(process.env.REACT_APP_API_URL+ "/admin/users", {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json"
@@ -241,7 +241,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						password: password
 					};
 			
-					const response = await fetch(process.env.REACT_APP_API_URL+"/admin/token", {
+					const response = await fetch(process.env.REACT_APP_API_URL + "/admin/token", {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json"

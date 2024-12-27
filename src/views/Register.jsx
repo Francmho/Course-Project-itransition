@@ -39,7 +39,7 @@ const Register = () => {
             <label htmlFor="name" className="form-label">Name</label>
             <input
             type="text"
-            id="name"
+            id="nameId"
             name="name"
             className={`form-control ${errors.name ? 'is-invalid' : ''}`}
             {...register('name')}
@@ -51,7 +51,7 @@ const Register = () => {
             <label htmlFor="email" className="form-label">Email</label>
             <input
             type="email"
-            id="email"
+            id="emailId"
             name="email"
             className={`form-control ${errors.email ? 'is-invalid' : ''}`}
             {...register('email')}
@@ -63,7 +63,7 @@ const Register = () => {
             <label htmlFor="password" className="form-label">Password</label>
             <input
             type="password"
-            id="password"
+            id="passwordId"
             name="password"
             className={`form-control ${errors.password ? 'is-invalid' : ''}`}
             {...register('password')}
