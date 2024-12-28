@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect  } from "react";
 import getState from "./flux.js";
 
 
@@ -19,40 +19,29 @@ const injectContext = PassedComponent => {
 			})
 		);
 
-
-		// // State for user login
-        // const [isLoggedIn, setIsLoggedIn] = useState(false);
-		// const { actions } = state;
-		// const token = localStorage.getItem('access_token');
-
-		// useEffect(() => {
-		// 	  if (token) {
-		// 		setIsLoggedIn(true);
-		// 		actions.fetchUsers();
-		// 	}
-		// }, [token, actions]);
-
-		// // Functions for login management
-        // const logIn = async (email, password) => {
-		// 	try {
-		// 		// Aquí llamas al login de flux para realizar la solicitud y obtener el responseData
-		// 		const userData = await actions.login(email, password);
-		
-		// 		// Si la respuesta es exitosa y contiene el token
-		// 		if (userData && userData.access_token) {
-		// 			setIsLoggedIn(true);  
-		// 			localStorage.setItem('access_token', JSON.stringify(userData.access_token));  // Guardas todo en localStorage
-		// 		}
-		// 	} catch (error) {
-		// 		console.error("(AppContext) Error during login:", error);
-		// 	}
-		// };
-		
-
-		// const logOut = () => {
-        //     setIsLoggedIn(false);
-		// 	localStorage.removeItem('access_token');
-        // };
+		useEffect(() => {
+            const token = localStorage.getItem("access_token");
+            if (token) {
+                // Actualizamos el estado solo una vez para no duplicar setStore
+                setState((prevState) => ({
+                    ...prevState,
+                    store: { 
+                        ...prevState.store, 
+                        isLogged: true, 
+                        registerStatus: true, // Si el usuario está logueado, asumimos que está registrado
+                    },
+                }));
+            } else {
+                setState((prevState) => ({
+                    ...prevState,
+                    store: { 
+                        ...prevState.store, 
+                        isLogged: false, 
+                        registerStatus: false,
+                    },
+                }));
+            }
+        }, []); 
 
 
 		return (
