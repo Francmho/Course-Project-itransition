@@ -7,6 +7,7 @@ import Register from '../views/Register.jsx'; // El componente de Register
 const Navbar = () => {
   const { store, actions } = useContext(Context); // Accede al estado de autenticación desde el Contexto
   const [showRegister, setShowRegister] = useState(false); // Controla la visibilidad del Offcanvas para el registro
+  const navigate = useNavigate(); 
 
   const handleShow = () => setShowRegister(true);
   const handleClose = () => setShowRegister(false);
@@ -15,7 +16,6 @@ const Navbar = () => {
   // const registerStatus = store.registerStatus;  // Obtener si ya está registrado
 
   const logOut = () => {
-    const navigate = useNavigate(); 
     actions.logout(); 
     navigate("/");
   };
