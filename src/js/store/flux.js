@@ -3,8 +3,8 @@ import { timeAgo } from '../../components/timeAgo.jsx';
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			personas: ["Pedro", "Maria"],
 			registerStatus: false,
+			isLogged: false,
 			filteredUsers: [],
 			users: [
 				{
@@ -235,39 +235,39 @@ const getState = ({ getStore, getActions, setStore }) => {
 			login: async (email, password) => {
 				try {
 					console.log("Enters flux-login");
-			
-					const data = {
-						email: email,
-						password: password
-					};
-			
+
 					const response = await fetch(process.env.REACT_APP_API_URL + "/admin/token", {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json"
 						},
-						body: JSON.stringify(data)
+						body: JSON.stringify({ email, password })
 					});
 			
 					const statusCode = response.status;
 					const responseData = await response.json();
 					console.log(responseData);
 					
-			
 					if (statusCode === 200) {
-						console.log("Login exitoso, token recibido:", responseData.access_token);
-
-						//localStorage.setItem('access_token', responseData.access_token);
+						console.log("Login sucessful, token received:", responseData.access_token);
+						document.cookie = `access_token=${responseData.access_token}; HttpOnly; Secure`;
+						setStore({ isLogged: true });
 						return responseData;  // Retorna el token para usarlo donde sea necesario
 					} else {
-						console.log("Error en el login:", responseData.error || "Error desconocido");
+						console.log("Error in login:", responseData.error || "Error from backend");
 					}
 			
 				} catch (error) {
-					console.error("Error durante la autenticación:", error);
+					console.error("(Flux) Error during login:", error);
 					throw error;
 				}
-			}
+			},
+
+			logout: () => {
+                // Eliminar la cookie con el token
+                document.cookie = 'access_token=; Max-Age=0; Secure';
+                setStore({ isLogged: false });
+            }
 			
 
 		}
