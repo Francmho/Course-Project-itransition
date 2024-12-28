@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Context } from '../js/store/appContext.js';  // Asegúrate de que sea el contexto correcto de tu aplicación
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Register from '../views/Register.jsx'; // El componente de Register
 
 
@@ -15,7 +15,9 @@ const Navbar = () => {
   // const registerStatus = store.registerStatus;  // Obtener si ya está registrado
 
   const logOut = () => {
-    actions.logout();  // Función de logout desde el contexto
+    const navigate = useNavigate(); 
+    actions.logout(); 
+    navigate("/");
   };
 
   return (

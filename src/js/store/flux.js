@@ -200,7 +200,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			registers: async(name, email, password) => {
 				try {
-					console.log("entra en register")
+					console.log("enters register (flux)")
 					const data = {
 						name: name,
 						email: email,
@@ -249,8 +249,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(responseData);
 					
 					if (statusCode === 200) {
-						console.log("Login sucessful, token received:", responseData.access_token);
-						document.cookie = `access_token=${responseData.access_token}; HttpOnly; Secure`;
+						console.log("Login successful, token received:", responseData.access_token);
+						localStorage.setItem('access_token', responseData.access_token);
+						// document.cookie = `access_token=${responseData.access_token}; HttpOnly; Secure`;
 						setStore({ isLogged: true });
 						return responseData;  // Retorna el token para usarlo donde sea necesario
 					} else {
@@ -264,9 +265,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			logout: () => {
-                // Eliminar la cookie con el token
-                document.cookie = 'access_token=; Max-Age=0; Secure';
+                //document.cookie = 'access_token=; Max-Age=0; Secure';
+				localStorage.removeItem('access_token'); 
                 setStore({ isLogged: false });
+				console.log("Logged out successful");
+				
             }
 			
 
