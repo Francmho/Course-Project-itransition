@@ -22,7 +22,6 @@ const injectContext = PassedComponent => {
 		useEffect(() => {
             const token = localStorage.getItem("access_token");
             if (token) {
-                // Actualizamos el estado solo una vez para no duplicar setStore
                 setState((prevState) => ({
                     ...prevState,
                     store: { 
