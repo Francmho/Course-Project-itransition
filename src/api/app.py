@@ -33,9 +33,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 db.init_app(app)
 migrate = Migrate(app, db, directory='src/api/migrations')
 
-print(f"Ruta de la base de datos: {db_path}")
-print(f"Base de datos URI: {app.config['SQLALCHEMY_DATABASE_URI']}")
-
+# print(f"Ruta de la base de datos: {db_path}")
+# print(f"Base de datos URI: {app.config['SQLALCHEMY_DATABASE_URI']}")
 
 
 if not os.path.exists(os.path.dirname(db_path)): # Nos aseguramos que se cree carpeta instance automatico para poder tener mydatabase.db dentro.
