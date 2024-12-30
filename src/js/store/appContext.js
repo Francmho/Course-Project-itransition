@@ -42,9 +42,29 @@ const injectContext = PassedComponent => {
             }
         }, []); 
 
+        const setLanguage = (lang) => {
+            setState(prevState => ({
+                ...prevState,
+                store: {
+                    ...prevState.store,
+                    language: lang
+                }
+            }));
+        };
+
+        // const setTheme = (newTheme) => {
+        //     setState(prevState => ({
+        //         ...prevState,
+        //         store: {
+        //             ...prevState.store,
+        //             theme: newTheme
+        //         }
+        //     }));
+        // };
+
 
 		return (
-			<Context.Provider value={{ ...state }}>
+			<Context.Provider value={{ ...state, setLanguage }}>
 				<PassedComponent {...props} />
 			</Context.Provider>
 		);

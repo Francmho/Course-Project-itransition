@@ -11,4 +11,5 @@ class User(db.Model):
     is_blocked = db.Column(db.Boolean, default=False)
     registration_date = db.Column(db.DateTime, default=datetime.utcnow)
 
-   
+    language = db.Column(db.String(10), default='en')  
+    theme = db.Column(db.String(10), default='light') 

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useTranslation } from 'react-i18next';
 
 
 const schema = yup.object({
@@ -13,6 +14,7 @@ const schema = yup.object({
 
 const Login = () => {
   const { store, actions } = useContext(Context);
+  const { t } = useTranslation("global"); 
   const navigate = useNavigate(); 
 
    // Use useForm with Yup validation
@@ -20,15 +22,6 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
 
-  // const [formData, setFormData] = useState({
-  //   email: '',
-  //   password: ''
-  // });
-
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData({ ...formData, [name]: value });
-  // };
 
   const handleLogin = async (data) => {
     const { email, password } = data;
@@ -45,12 +38,12 @@ const Login = () => {
 
   return (
     <div className="card m-5 p-5">
-      <h2 className="d-flex mb-4 pt-2 p-5 justify-content-center">Login</h2>
+      <h2 className="d-flex mb-4 pt-2 p-5 justify-content-center">{t('common.login')}</h2>
       <h5 className="d-flex mb-5 p-1 justify-content-center">Logotype</h5>
       {/* Form with Bootstrap classes and react-hook-form integration */}
       <form onSubmit={handleSubmit(handleLogin)}>
         <div className="mb-3">
-          <label htmlFor="email" className="form-label">Email</label>
+          <label htmlFor="email" className="form-label">{t('common.email')}</label>
           <input
             type="email"
             id="email"
@@ -62,7 +55,7 @@ const Login = () => {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="password" className="form-label">Password</label>
+          <label htmlFor="password" className="form-label">{t('common.password')}</label>
           <input
             type="password"
             id="password"
@@ -73,7 +66,7 @@ const Login = () => {
           {errors.password && <div className="invalid-feedback">{errors.password.message}</div>}
         </div>
 
-        <button type="submit" className="btn btn-primary">Login</button>
+        <button type="submit" className="btn btn-primary">{t('common.login')}</button>
       </form>
 
       {/* Display error if login fails */}
@@ -84,30 +77,3 @@ const Login = () => {
 
 export default Login;
 
-// <div className="container mt-5">
-//   <h2 className="mb-4">Login</h2>
-//   <form>
-//     <div>
-//       <label htmlFor="email">Email:</label>
-//       <input
-//         type="email"
-//         id="email"
-//         name="email"
-//         value={formData.email}
-//         onChange={handleChange}
-//       />
-//     </div>
-//     <div>
-//       <label htmlFor="password">Password:</label>
-//       <input
-//         type="password"
-//         id="password"
-//         name="password"
-//         value={formData.password}
-//         onChange={handleChange}
-//       />
-//     </div>
-//   </form>
-//   <button onClick={handleLogin}>Login</button>
-//   {store.loginError && <h4>{store.loginError}</h4>}
-// </div>

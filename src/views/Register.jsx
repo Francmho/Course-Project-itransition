@@ -3,6 +3,7 @@ import { Context } from '../js/store/appContext.js';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useTranslation } from 'react-i18next';
 
 
 const schema = yup.object({
@@ -12,8 +13,8 @@ const schema = yup.object({
   }).required();
 
 const Register = () => {
-
     const { store, actions } = useContext(Context)
+    const { t } = useTranslation("global"); 
 
     // Set up react-hook-form with Yup validation
     const { register, handleSubmit, formState: { errors } } = useForm({
@@ -33,10 +34,10 @@ const Register = () => {
     >
         <h5 className="d-flex mb-4 pt-2 p-5 justify-content-center">Logotype</h5>
         {/* Display success message */}
-        {store.registerStatus && <div className="alert alert-success mt-3">Registro Exitoso</div>}
+        {store.registerStatus && <div className="alert alert-success mt-3">{t('register.successfully_registered')}</div>}
         <form onSubmit={handleSubmit(handleRegister)}>
         <div className="mb-3">
-            <label htmlFor="name" className="form-label">Name</label>
+            <label htmlFor="name" className="form-label">{t('register.name')}</label>
             <input
             type="text"
             id="nameId"
@@ -48,7 +49,7 @@ const Register = () => {
         </div>
 
         <div className="mb-3">
-            <label htmlFor="email" className="form-label">Email</label>
+            <label htmlFor="email" className="form-label">{t('common.email')}</label>
             <input
             type="email"
             id="emailId"
@@ -60,7 +61,7 @@ const Register = () => {
         </div>
 
         <div className="mb-3">
-            <label htmlFor="password" className="form-label">Password</label>
+            <label htmlFor="password" className="form-label">{t('common.password')}</label>
             <input
             type="password"
             id="passwordId"
@@ -71,7 +72,7 @@ const Register = () => {
             {errors.password && <div className="invalid-feedback">{errors.password.message}</div>}
         </div>
 
-        <button type="submit" className="btn btn-primary">Register</button>
+        <button type="submit" className="btn btn-primary">{t('common.register')}</button>
         </form>
 
 

@@ -1,9 +1,11 @@
 import React, { useContext, useState  } from "react";
 import { Context } from "../js/store/appContext";
 import User from "../components/User.jsx";
+import { useTranslation } from "react-i18next";
 
 const AdminPage = () => {
   const { actions } = useContext(Context); // Obtenemos el store y las acciones desde Flux
+  const { t } = useTranslation("global");
   const [selectAll, setSelectAll] = useState(false); 
 
   const toggleSelectAll = () => {
@@ -37,7 +39,7 @@ const handleSearch = (e) => {
         <div className="container-fluid">
           <div className="navbar-nav d-flex flex-row flex-wrap-nowrap">
           <button className="btn btn-sm btn-outline-secondary m-1" onClick={() => handleBlockUnblock(true)}>
-            Block <i className="fas fa-lock"></i>
+          {t("common.block")} <i className="fas fa-lock"></i>
           </button>
 
           <button className="btn btn-sm btn-outline-primary m-1" onClick={() => handleBlockUnblock(false)}>

@@ -1,0 +1,32 @@
+{
+    "common": {
+        "register":"Registrar",
+        "login": "Iniciar Sesión",
+        "email": "Correo Electrónico",
+        "password": "Contraseña",
+        "log_out": "finalizar la sesión",
+        "block": "Bloquear",
+        "unblock": "Desbloquear",
+        "delete": "Eliminar",
+        "search_users": "Buscar"
+    },
+    "login": {
+        "title": "Iniciar Sesión"
+    },
+    "register": {
+        "name": "Nombre",
+        "login": "Iniciar Sesión"
+    },
+    "time": {
+        "month": "mes",
+        "months": "meses",
+        "day": "día",
+        "days": "dias",
+        "hour": "hora",
+        "hours": "horas",
+        "minute": "minuto",
+        "minutes": "minutos",
+        "ago": "antes",
+        "less_than_a_minute": "hace menos de un minuto"
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "common": {
+        "register":"Register",
+        "login": "Login",
+        "email": "Email",
+        "password": "Password",
+        "block": "Block",
+        "unblock": "Unblock",
+        "delete": "Delete",
+        "search_users": "Search users"
+    },
+    "login": {
+        "title": "Title "
+    },
+    "register": {
+        "name": "Name",
+        "successfully_registered" : "Successfully Registered",
+        "log_out": "Log out"
+    },
+    "time": {
+        "month": "month",
+        "months": "months",
+        "day": "day",
+        "days": "days",
+        "hour": "hour",
+        "hours": "hours",
+        "minute": "minute",
+        "minutes": "minutes",
+        "ago": "ago",
+        "less_than_a_minute": "less than a minute ago"
+    }
+}

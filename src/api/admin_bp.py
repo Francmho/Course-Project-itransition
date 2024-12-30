@@ -10,28 +10,10 @@ admin_bp = Blueprint('admin', __name__)
 bcrypt = Bcrypt()
 jwt = JWTManager()
 
-
-
-
-# from flask import Blueprint, request, jsonify # Blueprint para modularizar y relacionar con app
-# from flask.views import MethodView
-# from flask_bcrypt import Bcrypt                                  # Bcrypt para encriptación
-# from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity   # Jwt para tokens
-# from models import User                                          # importar tabla "User" de models
-# from database import db                                          # importa la db desde database.py
-# from datetime import timedelta, datetime                                   # importa tiempo especifico para rendimiento de token válido
-
-# admin_bp = Blueprint('admin', __name__)     # instanciar admin_bp desde clase Blueprint para crear las rutas.
-
-# bcrypt = Bcrypt()
-# jwt = JWTManager()
-
-
-
 # RUTA TEST de http://127.0.0.1:5000/admin_bp que muestra "Hola mundo":
-@admin_bp.route('/', methods=['GET'])
-def show_hello_world():
-     return "Hola mundo",200
+# @admin_bp.route('/', methods=['GET'])
+# def show_hello_world():
+#      return "Hola mundo",200
 
 
 # RUTA CREAR USUARIO

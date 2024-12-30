@@ -86,6 +86,9 @@ const calculateProgressAndColor = (isoDate, maxTimeInMonths = 3) => {
                   <small className={user.blocked ? "text-muted" : ""}>
                     {timeAgo(user.last_login)}
                   </small>
+                  <div>
+                      {/* <h5>Created At: <timeAgo isoDate={createdAt} /></h5> */}
+                  </div>
                 </div>
                 <div className="progress" style={{ height: "5px" }}>
                   <div

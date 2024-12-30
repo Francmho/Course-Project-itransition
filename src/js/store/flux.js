@@ -5,6 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			registerStatus: false,
 			isLogged: false,
+			language: "",
 			filteredUsers: [],
 			users: [
 				{

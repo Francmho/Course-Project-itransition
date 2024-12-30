@@ -2,12 +2,19 @@ import React, { useState, useContext } from 'react';
 import { Context } from '../js/store/appContext.js';  // Asegúrate de que sea el contexto correcto de tu aplicación
 import { Link, useNavigate } from 'react-router-dom';
 import Register from '../views/Register.jsx'; // El componente de Register
+import { useTranslation } from 'react-i18next';
 
 
 const Navbar = () => {
   const { store, actions } = useContext(Context); // Accede al estado de autenticación desde el Contexto
   const [showRegister, setShowRegister] = useState(false); // Controla la visibilidad del Offcanvas para el registro
   const navigate = useNavigate(); 
+  const { t , i18n } = useTranslation("global");
+  
+    const handleChangeLanguage = (lang) => {
+      i18n.changeLanguage(lang);
+      localStorage.setItem('language', lang);
+    };
 
   const handleShow = () => setShowRegister(true);
   const handleClose = () => setShowRegister(false);
@@ -25,16 +32,34 @@ const Navbar = () => {
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <Link className="navbar-brand mx-3" to="/">LogoApp</Link>
        
+        <div className="dropdown">
+          <button className="btn btn-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true"
+          > <i className="fa-solid fa-language"></i>
+          </button>
+          <ul className="dropdown-menu" aria-labelledby="languageDropdown" role="menu">
+            <li role="none">
+              <button className="dropdown-item" role="menuitem" onClick={() => handleChangeLanguage('en')}
+              >English
+              </button>
+            </li>
+            <li role="none">
+              <button className="dropdown-item" role="menuitem" onClick={() => handleChangeLanguage('es')}
+              >Español
+              </button>
+            </li>
+          </ul>
+        </div>
+
         <div id="navbarNav">
           <ul className="navbar-nav">
             {!store.registerStatus && !store.isLogged && (
               <li className="nav-item">
-                <button className="btn btn-sm btn-outline-primary mx-3" onClick={handleShow}>Register</button>
+                <button className="btn btn-sm btn-outline-primary mx-3" onClick={handleShow}>{t('common.register')}</button>
               </li>
             )}
             {store.isLogged && (
               <li className="nav-item">
-                <button className="btn btn-sm btn-outline-secondary mx-3" onClick={logOut}>Log Out</button>
+                <button className="btn btn-sm btn-outline-secondary mx-3" onClick={logOut}>{t('register.log_out')}</button>
               </li>
             )}
           </ul>
@@ -43,7 +68,7 @@ const Navbar = () => {
 
       <div className={`offcanvas offcanvas-start ${showRegister ? 'show' : ''}`} tabIndex="-1" id="offcanvasRegister" aria-labelledby="offcanvasRegisterLabel" data-bs-scroll="true" data-bs-backdrop="true">
         <div className="offcanvas-header">
-          <h5 id="offcanvasRegisterLabel">Register</h5>
+          <h5 id="offcanvasRegisterLabel">{t('common.register')}</h5>
           <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" onClick={handleClose}></button>
         </div>
         <div className="offcanvas-body">

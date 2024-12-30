@@ -3,11 +3,44 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import Layout from './Layout';
 import reportWebVitals from './reportWebVitals';
+import { I18nextProvider } from "react-i18next";
+import i18next from "i18next";
+import { initReactI18next } from "react-i18next"; 
+
+import globalES from "./translations/es/global.json";
+import globalEN from "./translations/en/global.json";
+
+
+i18next
+  .use(initReactI18next)  // Integra React automáticamente.
+  .init({
+    interpolation: { escapeValue: false },  // Evita el escape por defecto (útil para React).
+    resources: {
+      es: { global: globalES },
+      en: { global: globalEN },
+    },
+    lng: 'en',  // Idioma por defecto.
+  });
+
+// i18next.init({
+//   interpolation: {escapeValue:false},
+//   resource: {
+//     es: {
+//       global: globalES,
+//     },
+//     en: {
+//       global: globalEN,
+//     }
+//   }
+// });
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Layout />
+    <I18nextProvider i18next={i18next}>
+      <Layout />
+    </I18nextProvider>
   </React.StrictMode>
 );
 
