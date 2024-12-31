@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			registerStatus: false,
 			isLogged: false,
 			language: "",
+			theme: "",
 			filteredUsers: [],
 			users: [
 				{

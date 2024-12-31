@@ -22,18 +22,6 @@ i18next
     lng: 'en',  // Idioma por defecto.
   });
 
-// i18next.init({
-//   interpolation: {escapeValue:false},
-//   resource: {
-//     es: {
-//       global: globalES,
-//     },
-//     en: {
-//       global: globalEN,
-//     }
-//   }
-// });
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -26,5 +26,10 @@
         "ago": "atras",
         "less_than_a_minute": "hace menos de un minuto",
         "last_login": "Ultima conexión"
+    },
+    "theme": {
+        "light_mode": "Modo Dia",
+        "dark_mode": "Modo Noche",
+        "system_mode": "Sistema"
     }
 }

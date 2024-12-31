@@ -50,21 +50,23 @@ const injectContext = PassedComponent => {
                     language: lang
                 }
             }));
+            //localStorage.setItem("language", lang); 
         };
 
-        // const setTheme = (newTheme) => {
-        //     setState(prevState => ({
-        //         ...prevState,
-        //         store: {
-        //             ...prevState.store,
-        //             theme: newTheme
-        //         }
-        //     }));
-        // };
+        const setTheme = (newTheme) => {
+            setState(prevState => ({
+                ...prevState,
+                store: {
+                    ...prevState.store,
+                    theme: newTheme
+                }
+            }));
+            //localStorage.setItem("theme", newTheme); 
+        };
 
 
 		return (
-			<Context.Provider value={{ ...state, setLanguage }}>
+			<Context.Provider value={{ ...state, setLanguage, setTheme  }}>
 				<PassedComponent {...props} />
 			</Context.Provider>
 		);

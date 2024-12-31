@@ -26,5 +26,10 @@
         "ago": "ago",
         "less_than_a_minute": "less than a minute ago",
         "last_login": "Last login"
+    },
+    "theme": {
+        "light_mode": "Light Mode",
+        "dark_mode": "Dark Mode",
+        "system_mode": "System Mode"
     }
 }

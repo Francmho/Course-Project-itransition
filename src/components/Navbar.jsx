@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Context } from '../js/store/appContext.js';  // Asegúrate de que sea el contexto correcto de tu aplicación
 import { Link, useNavigate } from 'react-router-dom';
 import Register from '../views/Register.jsx'; // El componente de Register
@@ -6,21 +6,35 @@ import { useTranslation } from 'react-i18next';
 
 
 const Navbar = () => {
-  const { store, actions } = useContext(Context); // Accede al estado de autenticación desde el Contexto
+  const { store, actions, setTheme } = useContext(Context); // Accede al estado de autenticación desde el Contexto
   const [showRegister, setShowRegister] = useState(false); // Controla la visibilidad del Offcanvas para el registro
   const navigate = useNavigate(); 
   const { t , i18n } = useTranslation("global");
   
-    const handleChangeLanguage = (lang) => {
-      i18n.changeLanguage(lang);
-      localStorage.setItem('language', lang);
-    };
+  const handleChangeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+    localStorage.setItem('language', lang);
+  };
+
+  const handleSetTheme = (newTheme) => {
+    localStorage.setItem('theme', newTheme);
+    setTheme(newTheme);  // Asegúrate de que setTheme esté definido correctamente
+  };
 
   const handleShow = () => setShowRegister(true);
   const handleClose = () => setShowRegister(false);
 
-  // const isLogged = store.isLogged;  // Obtener si está logueado
-  // const registerStatus = store.registerStatus;  // Obtener si ya está registrado
+  useEffect(() => {
+    if (store.theme === "light") {
+      document.body.classList.remove("bg-dark");
+      document.body.classList.add("bg-light");
+    } else if (store.theme === "dark") {
+      document.body.classList.remove("bg-light");
+      document.body.classList.add("bg-dark");
+    } else {
+      document.body.classList.remove("bg-light", "bg-dark"); // Tema del sistema
+    }
+  }, [store.theme]);
 
   const logOut = () => {
     actions.logout(); 
@@ -37,16 +51,19 @@ const Navbar = () => {
           > <i className="fa-solid fa-language"></i>
           </button>
           <ul className="dropdown-menu" aria-labelledby="languageDropdown" role="menu">
-            <li role="none">
-              <button className="dropdown-item" role="menuitem" onClick={() => handleChangeLanguage('en')}
-              >English
-              </button>
-            </li>
-            <li role="none">
-              <button className="dropdown-item" role="menuitem" onClick={() => handleChangeLanguage('es')}
-              >Español
-              </button>
-            </li>
+            <li role="none"><button className="dropdown-item" role="menuitem" onClick={() => handleChangeLanguage('en')} >English </button> </li>
+            <li role="none"> <button className="dropdown-item" role="menuitem" onClick={() => handleChangeLanguage('es')} >Español  </button> </li>
+          </ul>
+        </div>
+
+        <div className="dropdown mx-3">
+          <button className="btn btn-light dropdown-toggle" type="button" id="themeDropdown" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" >
+            <i className="fa-solid fa-moon"></i>
+          </button>
+          <ul className="dropdown-menu" aria-labelledby="themeDropdown">
+            <li role="none"><button className="dropdown-item" role="menuitem" onClick={() => handleSetTheme('light')}>{t('theme.light_mode')}</button></li>
+            <li role="none"><button className="dropdown-item" role="menuitem" onClick={() => handleSetTheme('dark')}>{t('theme.dark_mode')}</button></li>
+            <li role="none"><button className="dropdown-item" role="menuitem" onClick={() => handleSetTheme('system')}>{t('theme.system_mode')}</button></li>
           </ul>
         </div>
 
