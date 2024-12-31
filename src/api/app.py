@@ -25,7 +25,7 @@ app.register_blueprint(public_bp, url_prefix='/public')  # blueprint public_bp
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # DATABASE---------------
-db_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'instance', 'mydatabase.db')
+# db_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'instance', 'mydatabase.db')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 #app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', f'sqlite:///{db_path}')
 
@@ -37,8 +37,8 @@ migrate = Migrate(app, db, directory='src/api/migrations')
 # print(f"Base de datos URI: {app.config['SQLALCHEMY_DATABASE_URI']}")
 
 
-if not os.path.exists(os.path.dirname(db_path)): # Nos aseguramos que se cree carpeta instance automatico para poder tener mydatabase.db dentro.
-    os.makedirs(os.path.dirname(db_path))
+# if not os.path.exists(os.path.dirname(db_path)): # Nos aseguramos que se cree carpeta instance automatico para poder tener mydatabase.db dentro.
+#     os.makedirs(os.path.dirname(db_path))
 
 
 # AL FINAL ( detecta que encendimos el servidor desde terminal y nos da detalles de los errores )

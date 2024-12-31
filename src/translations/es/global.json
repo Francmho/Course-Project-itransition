@@ -4,18 +4,15 @@
         "login": "Iniciar Sesión",
         "email": "Correo Electrónico",
         "password": "Contraseña",
-        "log_out": "finalizar la sesión",
+        "log_out": "Finalizar sesión",
         "block": "Bloquear",
         "unblock": "Desbloquear",
         "delete": "Eliminar",
         "search_users": "Buscar"
     },
-    "login": {
-        "title": "Iniciar Sesión"
-    },
     "register": {
         "name": "Nombre",
-        "login": "Iniciar Sesión"
+        "successfully_registered": "Te has registrado exitosamente."
     },
     "time": {
         "month": "mes",
@@ -26,7 +23,8 @@
         "hours": "horas",
         "minute": "minuto",
         "minutes": "minutos",
-        "ago": "antes",
-        "less_than_a_minute": "hace menos de un minuto"
+        "ago": "atras",
+        "less_than_a_minute": "hace menos de un minuto",
+        "last_login": "Ultima conexión"
     }
 }

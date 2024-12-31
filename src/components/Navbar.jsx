@@ -59,7 +59,7 @@ const Navbar = () => {
             )}
             {store.isLogged && (
               <li className="nav-item">
-                <button className="btn btn-sm btn-outline-secondary mx-3" onClick={logOut}>{t('register.log_out')}</button>
+                <button className="btn btn-sm btn-outline-secondary mx-3" onClick={logOut}>{t('common.log_out')}</button>
               </li>
             )}
           </ul>

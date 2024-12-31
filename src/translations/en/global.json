@@ -4,18 +4,15 @@
         "login": "Login",
         "email": "Email",
         "password": "Password",
+        "log_out": "Log out",
         "block": "Block",
         "unblock": "Unblock",
         "delete": "Delete",
-        "search_users": "Search users"
-    },
-    "login": {
-        "title": "Title "
+        "search_users": "Search"
     },
     "register": {
         "name": "Name",
-        "successfully_registered" : "Successfully Registered",
-        "log_out": "Log out"
+        "successfully_registered" : "Successfully Registered"
     },
     "time": {
         "month": "month",
@@ -27,6 +24,7 @@
         "minute": "minute",
         "minutes": "minutes",
         "ago": "ago",
-        "less_than_a_minute": "less than a minute ago"
+        "less_than_a_minute": "less than a minute ago",
+        "last_login": "Last login"
     }
 }

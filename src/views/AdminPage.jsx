@@ -55,7 +55,7 @@ const handleSearch = (e) => {
             <input
               className="form-control me-2"
               type="search"
-              placeholder="Search users"
+              placeholder={t("common.search_users")}
               aria-label="Search"
               onChange={handleSearch} // Filtrado en tiempo real
             />
