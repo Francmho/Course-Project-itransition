@@ -28,8 +28,15 @@
         "last_login": "Ultima conexión"
     },
     "theme": {
-        "light_mode": "Modo Dia",
-        "dark_mode": "Modo Noche",
-        "system_mode": "Sistema"
+        "light_mode": "Modo Claro",
+        "dark_mode": "Modo Obscuro",
+        "system_mode": "Segun Sistema"
+    },
+    "validations": {
+      "name_required": "El nombre es obligatorio",
+      "email_required": "El correo electrónico es obligatorio",
+      "email_invalid": "Invalid Email",
+      "password_required": "La contraseña es obligatoria",
+      "password_min_length": "La contraseña debe tener al menos 6 caracteres"
     }
 }

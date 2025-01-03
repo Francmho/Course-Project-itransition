@@ -53,13 +53,6 @@ const calculateProgressAndColor = (isoDate, maxTimeInMonths = 3) => {
 };
 
 
-  // Maneja la selección o deselección de todos los usuarios
-  // const toggleSelectAll = () => {
-  //   setSelectAll(!selectAll);
-  //   actions.selectUsers([],!selectAll); // Accion para seleccionar o deseleccionar todos los usuarios
-    
-  // };
-
    // Maneja la selección individual de un usuario
    const handleSelectUser = (userId) => {
     const isSelected = store.users.find(user => user.id === userId).checked;
@@ -70,7 +63,7 @@ const calculateProgressAndColor = (isoDate, maxTimeInMonths = 3) => {
 
   return (
     <div className="container">
-      <table className="table">
+      <table className={`table ${store.theme === 'dark' ? 'table-dark' : 'table-light'}`}>
         <thead>
           <tr>
             <th scope="col">
@@ -95,15 +88,15 @@ const calculateProgressAndColor = (isoDate, maxTimeInMonths = 3) => {
                 onChange={() => handleSelectUser(user.id)} // Selecciona o deselecciona un solo usuario
                 />
               </td>
-              <td className={user.blocked ? "text-decoration-line-through text-muted" : ""}>
+              <td className={user.blocked ? "text-decoration-line-through text-danger" : ""}>
                 {user.name}
               </td>
-              <td className={user.blocked ? "text-muted" : ""}>
+              <td className={user.blocked ? "text-danger" : ""}>
                 {user.email}
               </td>
               <td>
                 <div>
-                  <small className={user.blocked ? "text-muted" : ""}>
+                  <small className={user.blocked ? "text-danger" : ""}>
                     {timeAgo(user.last_login, t)}
                   </small>
                 </div>

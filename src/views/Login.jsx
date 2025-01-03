@@ -7,15 +7,16 @@ import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 
 
-const schema = yup.object({
-  email: yup.string().email('Correo electrónico inválido').required('El correo electrónico es obligatorio'),
-  password: yup.string().min(6, 'La contraseña debe tener al menos 6 caracteres').required('La contraseña es obligatoria'),
-}).required();
 
 const Login = () => {
   const { store, actions } = useContext(Context);
   const { t } = useTranslation("global"); 
   const navigate = useNavigate(); 
+  
+  const schema = yup.object({
+    email: yup.string().email(t("validations.email_invalid")).required(t("validations.email_required")),
+    password: yup.string().min(6,  t("validations.password_min_length")).required(t("validations.password_required")),
+  }).required();
 
    // Use useForm with Yup validation
    const { register, handleSubmit, formState: { errors } } = useForm({
@@ -28,7 +29,6 @@ const Login = () => {
     try {
         const userData = await actions.login(email, password);
         if (userData) {
-          // Si el login es exitoso, redirigir a /contact
           navigate('/adminpage');
         }
       } catch (error) {
@@ -37,10 +37,10 @@ const Login = () => {
   };
 
   return (
-    <div className="card m-5 p-5">
+    <div className={`card m-5 p-5 ${store.theme === 'dark' ? 'bg-dark text-light border border-light-subtle' : 'bg-light text-dark'}`}>
       <h2 className="d-flex mb-4 pt-2 p-5 justify-content-center">{t('common.login')}</h2>
       <h5 className="d-flex mb-5 p-1 justify-content-center">Logotype</h5>
-      {/* Form with Bootstrap classes and react-hook-form integration */}
+
       <form onSubmit={handleSubmit(handleLogin)}>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">{t('common.email')}</label>
@@ -48,7 +48,7 @@ const Login = () => {
             type="email"
             id="email"
             name="email"
-            className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+            className={`form-control ${errors.email ? 'is-invalid' : ''} ${store.theme === 'dark' ? 'bg-dark text-light' : 'bg-light text-dark'}`}
             {...register('email')}  // Registering input with react-hook-form
           />
           {errors.email && <div className="invalid-feedback">{errors.email.message}</div>}
@@ -60,7 +60,7 @@ const Login = () => {
             type="password"
             id="password"
             name="password"
-            className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+            className={`form-control ${errors.password ? 'is-invalid' : ''} ${store.theme === 'dark' ? 'bg-dark text-light' : 'bg-light text-dark'}`}
             {...register('password')}  // Registering input with react-hook-form
           />
           {errors.password && <div className="invalid-feedback">{errors.password.message}</div>}

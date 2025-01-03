@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Context } from '../js/store/appContext.js';  // Asegúrate de que sea el contexto correcto de tu aplicación
 import { Link, useNavigate } from 'react-router-dom';
 import Register from '../views/Register.jsx'; // El componente de Register
@@ -6,44 +6,47 @@ import { useTranslation } from 'react-i18next';
 
 
 const Navbar = () => {
-  const { store, actions, setTheme } = useContext(Context); // Accede al estado de autenticación desde el Contexto
+  const { store, actions } = useContext(Context); // Accede al estado de autenticación desde el Contexto
   const [showRegister, setShowRegister] = useState(false); // Controla la visibilidad del Offcanvas para el registro
   const navigate = useNavigate(); 
   const { t , i18n } = useTranslation("global");
+
   
+
   const handleChangeLanguage = (lang) => {
     i18n.changeLanguage(lang);
-    localStorage.setItem('language', lang);
+    actions.setLanguage(lang);
   };
 
-  const handleSetTheme = (newTheme) => {
-    localStorage.setItem('theme', newTheme);
-    setTheme(newTheme);  // Asegúrate de que setTheme esté definido correctamente
+  const handleThemeChange = (theme) => {
+    actions.setTheme(theme);
   };
+
+  // useEffect(() => {
+  //   if (store.theme === "light") {
+  //     document.body.classList.remove("bg-dark");
+  //     document.body.classList.add("bg-light");
+  //   } else if (store.theme === "dark") {
+  //     document.body.classList.remove("bg-light");
+  //     document.body.classList.add("bg-dark");
+  //   } else {
+  //     document.body.classList.remove("bg-light", "bg-dark"); // Tema del sistema
+  //   }
+  // }, [store.theme]);
+
 
   const handleShow = () => setShowRegister(true);
   const handleClose = () => setShowRegister(false);
-
-  useEffect(() => {
-    if (store.theme === "light") {
-      document.body.classList.remove("bg-dark");
-      document.body.classList.add("bg-light");
-    } else if (store.theme === "dark") {
-      document.body.classList.remove("bg-light");
-      document.body.classList.add("bg-dark");
-    } else {
-      document.body.classList.remove("bg-light", "bg-dark"); // Tema del sistema
-    }
-  }, [store.theme]);
 
   const logOut = () => {
     actions.logout(); 
     navigate("/");
   };
 
+
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className={`navbar navbar-expand-lg ${store.theme === 'dark' ? 'bg-dark text-light navbar-light' : 'bg-light text-dark navbar-dark'}`}>
         <Link className="navbar-brand mx-3" to="/">LogoApp</Link>
        
         <div className="dropdown">
@@ -61,9 +64,9 @@ const Navbar = () => {
             <i className="fa-solid fa-moon"></i>
           </button>
           <ul className="dropdown-menu" aria-labelledby="themeDropdown">
-            <li role="none"><button className="dropdown-item" role="menuitem" onClick={() => handleSetTheme('light')}>{t('theme.light_mode')}</button></li>
-            <li role="none"><button className="dropdown-item" role="menuitem" onClick={() => handleSetTheme('dark')}>{t('theme.dark_mode')}</button></li>
-            <li role="none"><button className="dropdown-item" role="menuitem" onClick={() => handleSetTheme('system')}>{t('theme.system_mode')}</button></li>
+            <li role="none"><button className="dropdown-item" role="menuitem" onClick={() => handleThemeChange('light')}>{t('theme.light_mode')}</button></li>
+            <li role="none"><button className="dropdown-item" role="menuitem" onClick={() => handleThemeChange('dark')}>{t('theme.dark_mode')}</button></li>
+            <li role="none"><button className="dropdown-item" role="menuitem" onClick={() => handleThemeChange('system')}>{t('theme.system_mode')}</button></li>
           </ul>
         </div>
 
@@ -83,7 +86,9 @@ const Navbar = () => {
         </div>
       </nav>
 
-      <div className={`offcanvas offcanvas-start ${showRegister ? 'show' : ''}`} tabIndex="-1" id="offcanvasRegister" aria-labelledby="offcanvasRegisterLabel" data-bs-scroll="true" data-bs-backdrop="true">
+      <div className={`offcanvas offcanvas-start ${showRegister ? 'show' : ''} ${
+    store.theme === 'dark' ? 'bg-dark text-light' : 'bg-light text-dark'
+  }`} tabIndex="-1" id="offcanvasRegister" aria-labelledby="offcanvasRegisterLabel" data-bs-scroll="true" data-bs-backdrop="true">
         <div className="offcanvas-header">
           <h5 id="offcanvasRegisterLabel">{t('common.register')}</h5>
           <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" onClick={handleClose}></button>

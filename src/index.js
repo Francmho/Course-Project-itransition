@@ -22,15 +22,15 @@ i18next
     lng: 'en',  // Idioma por defecto.
   });
 
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(
+    <React.StrictMode>
+      <I18nextProvider i18next={i18next}>
+        <Layout />
+      </I18nextProvider>
+    </React.StrictMode>
+  );
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <I18nextProvider i18next={i18next}>
-      <Layout />
-    </I18nextProvider>
-  </React.StrictMode>
-);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

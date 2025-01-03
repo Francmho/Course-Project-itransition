@@ -4,7 +4,7 @@ import User from "../components/User.jsx";
 import { useTranslation } from "react-i18next";
 
 const AdminPage = () => {
-  const { actions } = useContext(Context); // Obtenemos el store y las acciones desde Flux
+  const { actions, store } = useContext(Context); // Obtenemos el store y las acciones desde Flux
   const { t } = useTranslation("global");
   const [selectAll, setSelectAll] = useState(false); 
 
@@ -35,7 +35,7 @@ const handleSearch = (e) => {
 
   return (
     <div className="container mt-3">
-      <nav className="navbar navbar-expand-lg bg-light mb-3">
+      <nav className={`navbar navbar-expand-lg mb-3 ${store.theme === 'dark' ? 'bg-dark mb-3' : 'bg-light mb-3'}`}>
         <div className="container-fluid">
           <div className="navbar-nav d-flex flex-row flex-wrap-nowrap">
           <button className="btn btn-sm btn-outline-secondary m-1" onClick={() => handleBlockUnblock(true)}>
@@ -52,13 +52,18 @@ const handleSearch = (e) => {
           </div>
 
           <form className="d-flex ms-auto" role="search">
+          <div className="input-group">
+            <span className="input-group-text">
+              <i className="fa-solid fa-magnifying-glass"></i>
+            </span>
             <input
-              className="form-control me-2"
+              className={`form-control me-2 ${store.theme === 'dark' ? 'bg-dark text-primary border-light' : 'bg-light text-dark border-dark'}`} 
               type="search"
               placeholder={t("common.search_users")}
               aria-label="Search"
-              onChange={handleSearch} // Filtrado en tiempo real
+              onChange={handleSearch}
             />
+          </div>
           </form>
         </div>
       </nav>

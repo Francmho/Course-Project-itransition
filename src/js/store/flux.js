@@ -6,7 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			registerStatus: false,
 			isLogged: false,
 			language: "",
-			theme: "",
+			theme:"light",
 			filteredUsers: [],
 			users: [
 				{
@@ -42,11 +42,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 
-			exampleFunction: () => {
-				console.log("hola")
-				return
+			setLanguage: (lang) => {
+				setStore({ language: lang });
+				localStorage.setItem('language', lang);
+				console.log("Language set");
 			},
-
+			setTheme: (theme) => {
+				setStore({ theme: theme });
+				localStorage.setItem('theme', theme);
+				console.log("Theme set", theme);
+			},
+			
 			fetchUsers: async () => {
 				const token = JSON.parse(localStorage.getItem('access_token')); // Recuperar el token desde localStorage
 				try {
@@ -271,7 +277,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				localStorage.removeItem('access_token'); 
                 setStore({ isLogged: false });
 				console.log("Logged out successful");
-				
             }
 			
 

@@ -109,6 +109,24 @@ def show_users():
         return {"Error": "Token inválido o no proporcionado"}, 401
 
 
+#SAVE PREFERENCES THEME AND LANGUAGE
+# @admin_bp.route('/save-preferences', methods=['POST'])
+# def save_preferences():
+#     user_id = request.json.get('user_id')
+#     language = request.json.get('language')
+#     theme = request.json.get('theme')
+    
+#     user = User.query.get(user_id)
+#     if user:
+#         user.language = language
+#         user.theme = theme
+#         db.session.commit()
+#         return jsonify({"message": "Preferences updated!"}), 200
+#     return jsonify({"error": "User not found"}), 404
+
+
+
+
 
 # class Register(MethodView):
 #     def post(self):

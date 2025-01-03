@@ -1,11 +1,19 @@
 // import logo from './logo.svg';
+//import { useEffect } from 'react';
+import React, { useContext } from "react";
+import { Context } from "./store/appContext";
 import './App.css';
-//import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
+  const { store } = useContext(Context);
+
+  // useEffect(() => {
+  //   document.body.setAttribute('data-theme', store.theme === 'dark' ? 'dark' : 'light');
+  // }, [store.theme]);
+
   return (
-    <div>
+    <div className={`app-container ${store.theme === 'dark' ? 'bg-dark text-light' : 'bg-light text-dark'}`}>
       <p>
        Edit <code>src/App.js</code> and save to reload.
       </p>

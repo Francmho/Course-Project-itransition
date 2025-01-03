@@ -31,5 +31,12 @@
         "light_mode": "Light Mode",
         "dark_mode": "Dark Mode",
         "system_mode": "System Mode"
+    },
+    "validations": {
+      "name_required": "Name is a must",
+      "email_required": "Email is a must",
+      "email_invalid": "Invalid Email",
+      "password_required": "Password is a must",
+      "password_min_length": "Password must be at least 6 characters"
     }
 }
