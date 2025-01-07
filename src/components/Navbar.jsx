@@ -46,52 +46,56 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={`navbar navbar-expand-lg ${store.theme === 'dark' ? 'bg-dark text-light navbar-light' : 'bg-light text-dark navbar-dark'}`}>
+      <nav className={`navbar navbar-expand ${store.theme === 'dark' ? 'bg-dark text-light navbar-light' : 'bg-light text-dark navbar-dark'}`}>
         <Link className="navbar-brand mx-3" to="/">LogoApp</Link>
-       
-        <div className="dropdown">
-          <button className="btn btn-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true"
-          > <i className="fa-solid fa-language"></i>
-          </button>
-          <ul className="dropdown-menu" aria-labelledby="languageDropdown" role="menu">
-            <li role="none"><button className="dropdown-item" role="menuitem" onClick={() => handleChangeLanguage('en')} >English </button> </li>
-            <li role="none"> <button className="dropdown-item" role="menuitem" onClick={() => handleChangeLanguage('es')} >Español  </button> </li>
-          </ul>
-        </div>
+        <div className="container-fluid d-flex flex-wrap">
+          <div className="d-flex ms-auto">
+            <div className="dropdown">
+              <button className="btn btn-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true"
+              > <i className="fa-solid fa-language"></i>
+              </button>
+              <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown" role="menu">
+                <li role="none"><button className="dropdown-item" role="menuitem" onClick={() => handleChangeLanguage('en')} >English</button> </li>
+                <li role="none"> <button className="dropdown-item" role="menuitem" onClick={() => handleChangeLanguage('es')} >Español</button> </li>
+              </ul>
+            </div>
 
-        <div className="dropdown mx-3">
-          <button className="btn btn-light dropdown-toggle" type="button" id="themeDropdown" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" >
-            <i className="fa-solid fa-moon"></i>
-          </button>
-          <ul className="dropdown-menu" aria-labelledby="themeDropdown">
-            <li role="none"><button className="dropdown-item" role="menuitem" onClick={() => handleThemeChange('light')}>{t('theme.light_mode')}</button></li>
-            <li role="none"><button className="dropdown-item" role="menuitem" onClick={() => handleThemeChange('dark')}>{t('theme.dark_mode')}</button></li>
-            <li role="none"><button className="dropdown-item" role="menuitem" onClick={() => handleThemeChange('system')}>{t('theme.system_mode')}</button></li>
-          </ul>
-        </div>
+            <div className="dropdown mx-3">
+              <button className="btn btn-light dropdown-toggle" type="button" id="themeDropdown" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" >
+                <i className="fa-solid fa-moon"></i>
+              </button>
+              <ul className="dropdown-menu" aria-labelledby="themeDropdown">
+                <li role="none"><button className="dropdown-item" role="menuitem" onClick={() => handleThemeChange('light')}>{t('theme.light_mode')}</button></li>
+                <li role="none"><button className="dropdown-item" role="menuitem" onClick={() => handleThemeChange('dark')}>{t('theme.dark_mode')}</button></li>
+                {/* <li role="none"><button className="dropdown-item" role="menuitem" onClick={() => handleThemeChange('system')}>{t('theme.system_mode')}</button></li> */}
+              </ul>
+            </div>
 
-        <div id="navbarNav">
-          <ul className="navbar-nav">
-            {!store.registerStatus && !store.isLogged && (
-              <li className="nav-item">
-                <button className="btn btn-sm btn-outline-primary mx-3" onClick={handleShow}>{t('common.register')}</button>
-              </li>
-            )}
-            {store.isLogged && (
-              <li className="nav-item">
-                <button className="btn btn-sm btn-outline-secondary mx-3" onClick={logOut}>{t('common.log_out')}</button>
-              </li>
-            )}
-          </ul>
+            <div id="navbarNav">
+              <ul className="navbar-nav">
+                {!store.registerStatus && !store.isLogged && (
+                  <li className="nav-item">
+                    <button className="btn btn-sm btn-outline-primary mx-3" onClick={handleShow}>{t('common.register')}</button>
+                  </li>
+                )}
+                {store.isLogged && (
+                  <li className="nav-item">
+                    <button className="btn btn-sm btn-outline-secondary mx-3" onClick={logOut}>{t('common.log_out')}</button>
+                  </li>
+                )}
+              </ul>
+            </div>
+          </div>
         </div>
       </nav>
-
-      <div className={`offcanvas offcanvas-start ${showRegister ? 'show' : ''} ${
+      <div className={`offcanvas offcanvas-start mx-0${showRegister ? 'show' : ''} ${
     store.theme === 'dark' ? 'bg-dark text-light' : 'bg-light text-dark'
-  }`} tabIndex="-1" id="offcanvasRegister" aria-labelledby="offcanvasRegisterLabel" data-bs-scroll="true" data-bs-backdrop="true">
-        <div className="offcanvas-header">
+  }
+  ${store.isLogged ? 'alert alert-success' : ''}
+  `} tabIndex="-1" id="offcanvasRegister" aria-labelledby="offcanvasRegisterLabel" data-bs-scroll="true" data-bs-backdrop="true">
+        <div className="offcanvas-header fs-5">
           <h5 id="offcanvasRegisterLabel">{t('common.register')}</h5>
-          <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" onClick={handleClose}></button>
+          <button type="button" className="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close" onClick={handleClose}></button>
         </div>
         <div className="offcanvas-body">
           <Register/>
