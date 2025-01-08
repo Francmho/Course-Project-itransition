@@ -41,10 +41,10 @@ const Login = () => {
         <div className="col-12 col-md-10 col-lg-6">
           <div className={`card m-5 p-5 ${store.theme === 'dark' ? 'bg-dark text-light border border-light-subtle' : 'bg-light text-dark'}`}>
             <h1 className="d-flex m-4 pt-2 justify-content-center fs-5">{t('common.login')}</h1>
-            <h5 className="d-flex mb-5 p-1 justify-content-center">Logotype</h5>
+            <h5 className="d-flex m-5 p-1 justify-content-center">Logotype</h5>
   
             <form onSubmit={handleSubmit(handleLogin)}>
-              <div className="mb-3">
+              <div className="my-3">
                 <label htmlFor="email" className="form-label">{t('common.email')}</label>
                 <input
                   type="email"

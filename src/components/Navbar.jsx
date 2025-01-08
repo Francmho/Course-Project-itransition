@@ -22,18 +22,6 @@ const Navbar = () => {
     actions.setTheme(theme);
   };
 
-  // useEffect(() => {
-  //   if (store.theme === "light") {
-  //     document.body.classList.remove("bg-dark");
-  //     document.body.classList.add("bg-light");
-  //   } else if (store.theme === "dark") {
-  //     document.body.classList.remove("bg-light");
-  //     document.body.classList.add("bg-dark");
-  //   } else {
-  //     document.body.classList.remove("bg-light", "bg-dark"); // Tema del sistema
-  //   }
-  // }, [store.theme]);
-
 
   const handleShow = () => setShowRegister(true);
   const handleClose = () => setShowRegister(false);
@@ -88,14 +76,15 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      <div className={`offcanvas offcanvas-start mx-0${showRegister ? 'show' : ''} ${
-    store.theme === 'dark' ? 'bg-dark text-light' : 'bg-light text-dark'
-  }
-  ${store.isLogged ? 'alert alert-success' : ''}
-  `} tabIndex="-1" id="offcanvasRegister" aria-labelledby="offcanvasRegisterLabel" data-bs-scroll="true" data-bs-backdrop="true">
+      <div className={`offcanvas offcanvas-start ${showRegister ? 'show' : ''} 
+      ${store.theme === 'dark' ? 'bg-dark text-light' : 'bg-light text-dark'}
+      ${store.isLogged ? 'alert alert-success' : ''}
+      `} tabIndex="-1" id="offcanvasRegister" aria-labelledby="offcanvasRegisterLabel" data-bs-scroll="true" data-bs-backdrop="true">
         <div className="offcanvas-header fs-5">
-          <h5 id="offcanvasRegisterLabel">{t('common.register')}</h5>
-          <button type="button" className="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close" onClick={handleClose}></button>
+          <h5 className="offcanvas-title" id="offcanvasRegisterLabel">{t('common.register')}</h5>
+          <button type="button" className="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close" 
+          onClick={handleClose}
+          ></button>
         </div>
         <div className="offcanvas-body">
           <Register/>
