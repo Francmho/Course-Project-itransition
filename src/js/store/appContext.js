@@ -30,7 +30,6 @@ const injectContext = PassedComponent => {
                 store: { 
                     ...prevState.store, 
                     isLogged: !!token,  
-                    registerStatus: !!token,  
                     language: savedLanguage,
                     theme: savedTheme,
                 },

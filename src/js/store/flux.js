@@ -45,12 +45,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			setLanguage: (lang) => {
 				setStore({ language: lang });
 				localStorage.setItem('language', lang);
-				console.log("Language set");
+				console.log("Language switched");
 			},
 			setTheme: (theme) => {
 				setStore({ theme: theme });
 				localStorage.setItem('theme', theme);
-				console.log("Theme set", theme);
+				console.log("Theme switched", theme);
 			},
 			
 			fetchUsers: async () => {

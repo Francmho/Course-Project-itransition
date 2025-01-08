@@ -52,7 +52,7 @@ const Navbar = () => {
               <button className="btn btn-light dropdown-toggle" type="button" id="themeDropdown" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" >
                 <i className="fa-solid fa-moon"></i>
               </button>
-              <ul className="dropdown-menu" aria-labelledby="themeDropdown">
+              <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="themeDropdown">
                 <li role="none"><button className="dropdown-item" role="menuitem" onClick={() => handleThemeChange('light')}>{t('theme.light_mode')}</button></li>
                 <li role="none"><button className="dropdown-item" role="menuitem" onClick={() => handleThemeChange('dark')}>{t('theme.dark_mode')}</button></li>
                 {/* <li role="none"><button className="dropdown-item" role="menuitem" onClick={() => handleThemeChange('system')}>{t('theme.system_mode')}</button></li> */}
