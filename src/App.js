@@ -8,10 +8,6 @@ import './App.css';
 function App() {
   const { store } = useContext(Context);
 
-  // useEffect(() => {
-  //   document.body.setAttribute('data-theme', store.theme === 'dark' ? 'dark' : 'light');
-  // }, [store.theme]);
-
   return (
     <div className={`app-container ${store.theme === 'dark' ? 'bg-dark text-light' : 'bg-light text-dark'}`}>
       <p>

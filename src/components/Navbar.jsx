@@ -82,7 +82,7 @@ const Navbar = () => {
       `} tabIndex="-1" id="offcanvasRegister" aria-labelledby="offcanvasRegisterLabel" data-bs-scroll="true" data-bs-backdrop="true">
         <div className="offcanvas-header fs-5">
           <h5 className="offcanvas-title" id="offcanvasRegisterLabel">{t('common.register')}</h5>
-          <button type="button" className="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close" 
+          <button type="button" className={`btn-close ${store.theme === 'dark' ? 'btn-close-white' : ''}`} data-bs-dismiss="offcanvas" aria-label="Close" 
           onClick={handleClose}
           ></button>
         </div>
