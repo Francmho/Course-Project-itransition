@@ -1,3 +1,4 @@
+import SalesForce from '../../components/SalesForce.jsx';
 import { timeAgo } from '../../components/timeAgo.jsx'; 
 
 const getState = ({ getStore, getActions, setStore }) => {
@@ -8,6 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			language: "",
 			theme:"light",
 			filteredUsers: [],
+			salesForce: false,
 			users: [
 				{
 				  id: 1,
@@ -47,37 +49,53 @@ const getState = ({ getStore, getActions, setStore }) => {
 				localStorage.setItem('language', lang);
 				console.log("Language switched");
 			},
+
 			setTheme: (theme) => {
 				setStore({ theme: theme });
 				localStorage.setItem('theme', theme);
 				console.log("Theme switched", theme);
 			},
-			
-			fetchUsers: async () => {
-				const token = JSON.parse(localStorage.getItem('access_token')); // Recuperar el token desde localStorage
+
+
+			salesForceAuth: async () => {
 				try {
-					const response = await fetch(process.env.REACT_APP_API_URL + "/admin/users", {
-						method: 'GET',
-						headers: {
-							'Authorization': `Bearer ${token}`, // Incluir el token en el encabezado de autorización
-							'Content-Type': 'application/json'
-						}
-					});
-					console.log(response);
-			
-					if (!response.ok) {
-						throw new Error('Error fetching users: ' + response.statusText);
-					}
-			
-					const users = await response.json();
-					setStore({ ...getStore(), users });
-					console.log(users);
-					
+					const apiUrl = process.env.REACT_APP_API_URL; // Usa localhost si no está definida la URL
+        			window.location.href = `${apiUrl}/salesforce/loginSF`;
 				} catch (error) {
-					console.error("Error fetching users: ", error);
+					console.error('Error al redirigir a Salesforce:', error);
 				}
 			},
+
 			
+			salesForceRegister : async (e) => {
+				e.preventDefault();
+				const response = await fetch(`${process.env.REACT_APP_API_URL} /salesforce/register`, {
+					method: 'POST',
+					headers: {
+					  'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+					  name: e.target.formName.value,
+					  email: e.target.formEmail.value,
+					  // más datos...
+					}),
+				  });
+				
+				//   try {
+				// 	// Redirige a la página de autenticación de Salesforce
+				// 		window.location.href = `${process.env.REACT_APP_API_URL}/salesforce/loginSF`;
+				// 	} catch (error) {
+				// 		console.error('Error al redirigir a Salesforce:', error);
+				// 	}
+
+				const data = await response.json();
+				if (data.success) {
+					console.log('Successful Auth Salesforce');
+				} else {
+					console.log('Error in auth in Salesforce');
+				}
+			},
+
 
 			searchUser: (query) => {
 				const store = getStore();
@@ -127,52 +145,49 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ ...store, users: updatedUsers });
 				},
 
-			// blockSelectedUsers: async () => {
+			//SF integration
+			// blockUnblockUsers: (isBlock) => {
 			// 	const store = getStore();
-			// 	const selectedUsers = store.users.filter(user => user.checked);
+			// 	const selectedUserIds = store.users.filter(user => user.checked).map(user => user.id);
 			
-			// 	try {
-			// 		const response = await fetch('/api/block-users', {
-			// 			method: 'POST',
-			// 			headers: {
-			// 				'Content-Type': 'application/json',
-			// 			},
-			// 			body: JSON.stringify({ users: selectedUsers.map(user => user.id) }),
-			// 		});
-			// 		if (response.ok) {
-			// 			const updatedUsers = store.users.map(user => 
-			// 				selectedUsers.includes(user) ? { ...user, blocked: true, checked: false  } : user
-			// 			);
-			// 			setStore({ ...store, users: updatedUsers });
-			// 		}
-			// 	} catch (error) {
-			// 		console.error("Error blocking users: ", error);
+			// 	// Si no hay usuarios seleccionados, no hacemos nada
+			// 	if (selectedUserIds.length === 0) {
+			// 		return;
 			// 	}
+			
+			// 	fetch(`${process.env.REACT_APP_API_URL}/salesforce/users/block_unblock`, {
+			// 		method: 'POST',
+			// 		headers: {
+			// 			'Content-Type': 'application/json',
+			// 		},
+			// 		body: JSON.stringify({
+			// 			user_ids: selectedUserIds,
+			// 			action: isBlock ? 'block' : 'unblock'  // Decide si bloquear o desbloquear
+			// 		})
+			// 	})
+			// 	.then(resp => {
+			// 		if (!resp.ok) throw new Error("Error al bloquear/desbloquear usuarios.");
+			// 		return resp.json();
+			// 	})
+			// 	.then(data => {
+			// 		const updatedUsers = store.users.map(user => {
+			// 			// Si el usuario fue bloqueado/desbloqueado, actualizamos el estado
+			// 			if (user.checked) {
+			// 				return {
+			// 					...user,
+			// 					blocked: isBlock, // Alterna el estado de 'blocked'
+			// 					checked: false    // Desmarca el usuario después de bloquear/desbloquear
+			// 				};
+			// 			}
+			// 			return user;
+			// 		});
+			
+			// 		setStore({ ...store, users: updatedUsers });
+			// 		console.log(data.message);  // Muestra el mensaje recibido desde Flask
+			// 	})
+			// 	.catch(error => console.error(error));
 			// },
 
-
-			// unblockSelectedUsers: async () => {
-			// 	const store = getStore();
-			// 	const selectedUsers = store.users.filter(user => user.checked);
-			
-			// 	try {
-			// 		const response = await fetch('/api/unblock-users', {
-			// 			method: 'POST',
-			// 			headers: {
-			// 				'Content-Type': 'application/json',
-			// 			},
-			// 			body: JSON.stringify({ users: selectedUsers.map(user => user.id) }),
-			// 		});
-			// 		if (response.ok) {
-			// 			const updatedUsers = store.users.map(user => 
-			// 				selectedUsers.includes(user) ? { ...user, blocked: false, checked: false  } : user
-			// 			);
-			// 			setStore({ ...store, users: updatedUsers });
-			// 		}
-			// 	} catch (error) {
-			// 		console.error("Error unblocking users: ", error);
-			// 	}
-			// },
 			
 			
 			deleteSelectedUsers: () => {
@@ -181,31 +196,36 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ ...store, users: remainingUsers });
 				},
 
-			// deleteSelectedUsers: async () => {
+			// SF integration
+			// deleteSelectedUsers: () => {
 			// 	const store = getStore();
-			// 	const selectedUsers = store.users.filter(user => user.checked);
+			// 	const selectedUserIds = store.users.filter(user => user.checked).map(user => user.id);
 			
-			// 	try {
-			// 		const response = await fetch('/api/delete-users', {
-			// 			method: 'DELETE',
-			// 			headers: {
-			// 				'Content-Type': 'application/json',
-			// 			},
-			// 			body: JSON.stringify({ users: selectedUsers.map(user => user.id) }),
-			// 		});
-			// 		if (response.ok) {
-			// 			const remainingUsers = store.users.filter(user => !selectedUsers.includes(user));
-			// 			setStore({ ...store, users: remainingUsers });
-			// 		}
-			// 	} catch (error) {
-			// 		console.error("Error deleting users: ", error);
+			// 	// Si no hay usuarios seleccionados, no hacemos nada
+			// 	if (selectedUserIds.length === 0) {
+			// 		return;
 			// 	}
+			
+			// 	fetch(`${process.env.REACT_APP_API_URL} + "/salesforce/users/delete"`, {
+			// 		method: 'POST',
+			// 		headers: {
+			// 			'Content-Type': 'application/json',
+			// 		},
+			// 		body: JSON.stringify({ user_ids: selectedUserIds })
+			// 	})
+			// 	.then(resp => {
+			// 		if (!resp.ok) throw new Error("Error al eliminar usuarios.");
+			// 		return resp.json();
+			// 	})
+			// 	.then(data => {
+			// 		const remainingUsers = store.users.filter(user => !selectedUserIds.includes(user.id));  // Filtra los usuarios eliminados
+			// 		setStore({ ...store, users: remainingUsers });
+			// 		console.log(data.message);  // Muestra el mensaje recibido desde Flask
+			// 	})
+			// 	.catch(error => console.error(error));
 			// },
-				
 
-  
 			//REGISTER AND LOGIN 
-
 			registers: async(name, email, password) => {
 				try {
 					console.log("enters register (flux)")

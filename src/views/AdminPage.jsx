@@ -2,6 +2,7 @@ import React, { useContext, useState  } from "react";
 import { Context } from "../js/store/appContext";
 import User from "../components/User.jsx";
 import { useTranslation } from "react-i18next";
+import SalesForce from "../components/SalesForce.jsx";
 
 const AdminPage = () => {
   const { actions, store } = useContext(Context); // Obtenemos el store y las acciones desde Flux
@@ -35,6 +36,10 @@ const handleSearch = (e) => {
 
   return (
     <div className="container mt-3">
+      <div className="d-flex justify-content-end m-3">
+      <small className="d-flex justify-content-end m-1" >Connect with Salesforce:</small>
+       <SalesForce/>
+      </div>
       <nav className={`navbar navbar-expand-lg mb-3 ${store.theme === 'dark' ? 'bg-dark mb-3' : 'bg-light mb-3'}`}>
         <div className="container-fluid">
           <div className="navbar-nav d-flex flex-row flex-wrap-nowrap">

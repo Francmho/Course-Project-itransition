@@ -12,7 +12,17 @@
     },
     "register": {
         "name": "Nombre",
-        "successfully_registered": "Te has registrado exitosamente."
+        "successfully_registered": "Te has registrado exitosamente.",
+        "city": "Ciudad",
+        "enter_city": "Ingresa tu ciudad.",
+        "zip_code": "Código Postal",
+        "enter_zip_code": "Ingresa tu Codigo Postal",
+        "phone": "Télefono",
+        "enter_phone": "Ingresa tu número de Télefono Celular",
+        "submit": "Registro exitoso",
+        "register_sf": "Autenticación Salesforce",
+        "enter_name": "Ingresa tu nombre",
+        "enter_password": "Ingresa tu contraseña"
     },
     "time": {
         "month": "mes",

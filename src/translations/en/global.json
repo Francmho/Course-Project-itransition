@@ -12,7 +12,17 @@
     },
     "register": {
         "name": "Name",
-        "successfully_registered" : "Successfully Registered"
+        "successfully_registered" : "Successfully Registered",
+        "city": "City",
+        "enter_city": "Enter your city",
+        "zip_code": "Zip Code",
+        "enter_zip_code": "Enter your zip code",
+        "phone": "Phone",
+        "enter_phone": "Enter your phone number",
+        "submit": "Complete Registration",
+        "register_sf": "Salesforce Authentication",
+        "enter_name": "Enter your password",
+        "enter_password": "Enter your password"
     },
     "time": {
         "month": "month",

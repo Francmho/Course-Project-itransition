@@ -14,6 +14,8 @@ alembic = "*"
 bcrypt = "*"
 psycopg2-binary = "*"
 python-dotenv = "*"
+authlib = "*"
+requests = "*"
 
 [dev-packages]
 
