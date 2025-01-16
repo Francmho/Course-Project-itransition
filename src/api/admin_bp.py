@@ -5,18 +5,19 @@ from flask_jwt_extended import JWTManager, create_access_token, jwt_required, ge
 from models import User
 from database import db
 from datetime import timedelta, datetime
+# from authlib.integrations.flask_client import OAuth
 
 admin_bp = Blueprint('admin', __name__)
 bcrypt = Bcrypt()
 jwt = JWTManager()
 
-# RUTA TEST de http://127.0.0.1:5000/admin_bp que muestra "Hola mundo":
-# @admin_bp.route('/', methods=['GET'])
-# def show_hello_world():
-#      return "Hola mundo",200
 
+# # RUTA TEST de http://127.0.0.1:5000/admin_bp que muestra "Hola mundo":
+# # @admin_bp.route('/', methods=['GET'])
+# # def home():
+# #      return "Welcome!",200
 
-# RUTA CREAR USUARIO
+#/ADMIN ROUTES - CREAR USUARIO
 @admin_bp.route('/users', methods=['POST'])
 def create_user():
     try:
@@ -78,7 +79,7 @@ def get_token():
 
             expires = timedelta(minutes=30)  # pueden ser "hours", "minutes", "days","seconds"
             user_id = login_user.id       # recuperamos el id del usuario para crear el token...
-            access_token = create_access_token(identity=user_id, expires_delta=expires)   # creamos el token con tiempo vencimiento
+            access_token = create_access_token(identity=str(user_id), expires_delta=expires)   # creamos el token con tiempo vencimiento
             return jsonify({ 'access_token':access_token}), 200  # Enviamos el token al front ( si es necesario serializamos el "login_user" y tambien lo enviamos en el objeto json )
 
         else:
